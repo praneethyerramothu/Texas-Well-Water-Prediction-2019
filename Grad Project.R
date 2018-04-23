@@ -64,7 +64,9 @@ new_predictor<-data.frame(Population<-to_model2$Population.y)
 Well_water_usage_2019<-rep(-25,nrow(to_model2))
 m<-coef(summary(fit_init)) [1,1]+coef(summary(fit_init))[1,3]
 prediction<-(predict(fit_init,new_predictor)+as.data.frame(Well_water_usage_2019))*m
-to_model2<-as.data.frame(c(to_model2,prediction))
+
+#the main data frame that contains predicted values
+to_model2<-as.data.frame(c(prediction,to_model2))
 
 
 data<-dplyr::select(wells18,
@@ -142,35 +144,15 @@ ui <- dashboardPage( skin = 'red',
                          
                          # Third tab content
                          tabItem(tabName = "Predict",
-                                 #box( height='350',
-                                  #    textInput(inputId = "GRE",
-                                   #             label = "Enter Your Gre score",
-                                    #            value = 200),
-                                    #  textInput(inputId = "Toefl",
-                                    #            label = "Enter Your Toefl score",
-                                    #            value = 120),
-                                    #  sliderInput(inputId = "AWA",
-                                   #               label = "Enter Your AWA score",
-                                  #                min = 1,
-                                     #             max = 5,
-                                    #              value = 10),
-                                    # sliderInput(inputId = "per",
-                                  #                label = "Enter Your Under Grad percentage score",
-                                   #               min = 1,
-                                  #                max = 10,
-                                 #                 value = 300),
-                                 #     actionButton('action1','predict')
-                                # ),
-                                # box(
-                               #    title = 'Prediction For User Input.',
-                                #   status = 'warning',
-                                 #  tableOutput('table1')
-                                # )
+                                
                                ui <- basicPage(
+                                 
                                  h2("Predicted Values for Well water 2019"),
-                                 DT::dataTableOutput("mytable")
+                           
+                                     DT::dataTableOutput("mytable")
                                )
                          )
+                         
                          
                           
                          
@@ -219,7 +201,7 @@ server <- function(input, output) {
                           
                           
                           blingIcon <- makeIcon(
-                            iconUrl = "/Users/praneeththomas/Downloads/School Stuff/R/Project1/college-scorecard/image.png",
+                            iconUrl = "/Users/praneeththomas/Downloads/School Stuff/Grad Project/Prediction - Grad Project/Grad Project/well.png",
                             iconWidth = 17, iconHeight = 17,
                           )
                           
@@ -250,7 +232,7 @@ server <- function(input, output) {
                           
                           
                           blingIcon <- makeIcon(
-                            iconUrl = "/Users/praneeththomas/Downloads/School Stuff/R/Project1/college-scorecard/image.png",
+                            iconUrl = "/Users/praneeththomas/Downloads/School Stuff/Grad Project/Prediction - Grad Project/Grad Project/well.png",
                             iconWidth = 30, iconHeight = 30,
                           )
                           
@@ -283,7 +265,7 @@ server <- function(input, output) {
                           
                           
                           blingIcon <- makeIcon(
-                            iconUrl = "/Users/praneeththomas/Downloads/School Stuff/R/Project1/college-scorecard/image.png",
+                            iconUrl = "/Users/praneeththomas/Downloads/School Stuff/Grad Project/Prediction - Grad Project/Grad Project/well.png",
                             iconWidth = 30, iconHeight = 30,
                           )
                           
